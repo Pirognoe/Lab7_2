@@ -1,6 +1,6 @@
 import math
 
-#Declare first configuration for testing
+# Declare first configuration for testing
 conf = {
         'exam_max': 30,
         'lab_max': 7,
@@ -34,10 +34,12 @@ class Student(object):
             print(self.labs[n])
         return self
 
+    # Define the exam method
     def make_exam(self, m):
         if m > self.conf['exam_max']:
-            print(m, self.conf['exam_max'], m > self.conf['exam_max'])
             return self
+        else:
+            self.exam = m
         return self
 
     def is_certified(self):
