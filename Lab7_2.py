@@ -19,6 +19,8 @@ class Student(object):
             self.labs.append(0)
         # Create variable to store exam result
         self.exam = 0
+        self.maximum_score = self.conf['exam_max'] + self.conf['lab_max'] * self.conf['lab_num']
+        self.enough_score = self.conf['k'] * self.maximum_score
 
 
     def make_lab(self,m,n=0):
@@ -29,9 +31,8 @@ class Student(object):
             pass
             return self
         else:
-            print('zhopa', n, m)
             self.labs[n] = m
-            print(self.labs[n])
+            #print(self.labs[n])
         return self
 
     # Define the exam method
@@ -43,8 +44,9 @@ class Student(object):
         return self
 
     def is_certified(self):
-        pass
-        return self
+        self.numeric_result = self.exam + sum(self.labs)
+        self.logic_result = self.numeric_result > self.enough_score
+        return (self.numeric_result, self.logic_result)
 
 
 
@@ -52,6 +54,7 @@ conf1 = {'exam_max': 20, 'lab_max': 40, 'lab_num': 12, 'k': 0.75}
 o1 = Student('Oleg', conf1)
 print('============================Conf_1=====================')
 o1.is_certified(), '== (0, False)'
+print(o1.is_certified(), '== (0, False)')
 o2 = Student('Oleg', conf1)
 o2.make_lab(35.2)
 print(o2.labs)
@@ -69,7 +72,8 @@ o3.make_lab(50, 2)
 o3.is_certified()
 o3.make_lab(40, 1)
 print('============================Conf_5=====================')
-o3.is_certified(), '== (75, True)'
+print(o3.is_certified(), '== (75, True)')
+
 conf2 = {'exam_max': 52, 'lab_max': 8, 'lab_num': 6, 'k': 0.5}
 o4 = Student('Oleg', conf2)
 o4.make_exam(100)
