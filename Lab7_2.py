@@ -1,6 +1,4 @@
-import math
-
-# Declare first configuration for testing
+# Declare initial configuration for testing
 conf = {
     'exam_max': 30,
     'lab_max': 7,
@@ -33,9 +31,10 @@ class Student(object):
         elif n != 0:
             self.labs[n - 1] = m
         elif n == 0:
-            for item in self.labs:
-                if item == 0:
-                    self.labs[item] = m
+            for i in range(len(self.labs)):
+                if self.labs[i] == 0:
+                    self.labs[i] = m
+                    break
         return self
 
     # Define the exam method
